@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Nova Clean AI - Smart Cleaning & Pest Control",
+  "description": "An advanced AI-powered dashboard for Nova Clean services, featuring real-time voice assistants, visual analysis for pest detection, and AI-generated promotional videos.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
