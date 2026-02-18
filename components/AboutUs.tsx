@@ -1,7 +1,9 @@
 
 import React from 'react';
 
-const AboutUs: React.FC<{ t: any }> = ({ t }) => {
+import { TranslationProps } from '../types';
+
+const AboutUs: React.FC<TranslationProps> = ({ t }) => {
   return (
     <section id="about" className="py-24 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4">

@@ -6,7 +6,9 @@ import VideoStudio from './VideoStudio';
 import SearchMaps from './SearchMaps';
 import SEOContentLab from './SEOContentLab';
 
-const AISection = ({ t, lang }: any) => {
+import { TranslationWithLangProps } from '../types';
+
+const AISection: React.FC<TranslationWithLangProps> = ({ t, lang }) => {
   const [activeTool, setActiveTool] = useState('voice');
 
   const tools = [
