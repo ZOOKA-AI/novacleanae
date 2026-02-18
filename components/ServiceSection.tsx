@@ -1,7 +1,9 @@
 
 import React from 'react';
 
-const ServiceSection = ({ t }: any) => {
+import { TranslationProps } from '../types';
+
+const ServiceSection: React.FC<TranslationProps> = ({ t }) => {
   const services = [
     {
       title: t.services.cleaning,

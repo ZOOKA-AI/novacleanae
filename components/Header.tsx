@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
 
-const Header = ({ t, toggleLang, currentLang }: any) => {
+import { HeaderProps } from '../types';
+
+const Header: React.FC<HeaderProps> = ({ t, toggleLang, currentLang }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -90,8 +90,9 @@ const VoiceAssistant: React.FC = () => {
       });
 
       sessionRef.current = await sessionPromise;
-    } catch (err: any) {
-      setError(err.message || "Failed to start microphone.");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to start microphone.";
+      setError(errorMessage);
       setIsActive(false);
     }
   };

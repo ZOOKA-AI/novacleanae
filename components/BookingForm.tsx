@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
 
-const BookingForm: React.FC<{ t: any }> = ({ t }) => {
+import { TranslationProps } from '../types';
+
+const BookingForm: React.FC<TranslationProps> = ({ t }) => {
   const [spaceType, setSpaceType] = useState('apartment');
   const [size, setSize] = useState('');
   const [estimating, setEstimating] = useState(false);

@@ -1,12 +1,15 @@
 {
-  "name": "copy-of-nova-clean-ai---smart-cleaning-&-pest-control",
+  "name": "novacleanae",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Nova Clean UAE - AI-powered cleaning, disinfection, and pest control services in Abu Dhabi",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^19.2.4",
@@ -18,5 +21,9 @@
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   }
 }

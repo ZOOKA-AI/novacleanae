@@ -1,7 +1,9 @@
 
 import React from 'react';
 
-const Footer = ({ t }: any) => {
+import { TranslationProps } from '../types';
+
+const Footer: React.FC<TranslationProps> = ({ t }) => {
   const socialLinks = [
     { name: 'Facebook', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
     { name: 'Instagram', icon: 'M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z M17.5 6.5h.01' },
