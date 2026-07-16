@@ -1,0 +1,1 @@
+CONTRIBUTING.md content for novacleanae
