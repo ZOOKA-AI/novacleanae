@@ -1,5 +1,50 @@
 
 import { GoogleGenAI, Type, Modality, GenerateContentResponse } from "@google/genai";
+import { GroundingSource } from "../types";
+
+interface GoogleSearchTool {
+  googleSearch: Record<string, never>;
+}
+
+interface GoogleMapsTool {
+  googleMaps: Record<string, never>;
+}
+
+type GeminiTool = GoogleSearchTool | GoogleMapsTool;
+
+interface ToolConfig {
+  retrievalConfig?: {
+    latLng: {
+      latitude: number;
+      longitude: number;
+    };
+  };
+}
+
+interface GroundingChunk {
+  web?: {
+    title: string;
+    uri: string;
+  };
+  maps?: {
+    title: string;
+    uri: string;
+  };
+}
+
+interface VideoGenerationParams {
+  model: string;
+  prompt: string;
+  config: {
+    numberOfVideos: number;
+    resolution: string;
+    aspectRatio: '16:9' | '9:16';
+  };
+  image?: {
+    imageBytes: string;
+    mimeType: string;
+  };
+}
 
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
@@ -48,10 +93,10 @@ export async function generateNovaImage(prompt: string, size: "1K" | "2K" | "4K"
 }
 
 // 4. Search & Maps Grounding (Flash)
-export async function searchServices(query: string, location?: { lat: number, lng: number }) {
+export async function searchServices(query: string, location?: { lat: number, lng: number }): Promise<{ text: string, sources: GroundingSource[] }> {
   const ai = getAI();
-  const tools: any[] = [{ googleSearch: {} }];
-  let toolConfig: any = undefined;
+  const tools: GeminiTool[] = [{ googleSearch: {} }];
+  let toolConfig: ToolConfig | undefined = undefined;
 
   if (location) {
     tools.push({ googleMaps: {} });
@@ -71,20 +116,20 @@ export async function searchServices(query: string, location?: { lat: number, ln
     config: { tools, toolConfig }
   });
 
-  const sources: any[] = [];
+  const sources: GroundingSource[] = [];
   const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
-  chunks.forEach((chunk: any) => {
+  chunks.forEach((chunk: GroundingChunk) => {
     if (chunk.web) sources.push({ title: chunk.web.title, uri: chunk.web.uri });
     if (chunk.maps) sources.push({ title: chunk.maps.title, uri: chunk.maps.uri });
   });
 
-  return { text: response.text, sources };
+  return { text: response.text || '', sources };
 }
 
 // 5. Veo Video Generation
-export async function generateVeoVideo(prompt: string, aspectRatio: '16:9' | '9:16' = '16:9', imageBase64?: string) {
+export async function generateVeoVideo(prompt: string, aspectRatio: '16:9' | '9:16' = '16:9', imageBase64?: string): Promise<string | null> {
   const ai = getAI();
-  const params: any = {
+  const params: VideoGenerationParams = {
     model: 'veo-3.1-fast-generate-preview',
     prompt,
     config: {

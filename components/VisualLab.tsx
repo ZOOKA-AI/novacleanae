@@ -2,7 +2,9 @@
 import React, { useState, useRef } from 'react';
 import { analyzeImage, generateNovaImage } from '../services/geminiService';
 
-const VisualLab: React.FC<{ t: any }> = ({ t }) => {
+import { TranslationProps } from '../types';
+
+const VisualLab: React.FC<TranslationProps> = ({ t }) => {
   const [activeTab, setActiveTab] = useState<'generate' | 'analyze'>('generate');
   const [image, setImage] = useState<string | null>(null);
   const [prompt, setPrompt] = useState('');

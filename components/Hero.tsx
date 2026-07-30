@@ -2,7 +2,9 @@
 import React from 'react';
 import BookingForm from './BookingForm';
 
-const Hero = ({ t, lang }: any) => {
+import { TranslationWithLangProps } from '../types';
+
+const Hero: React.FC<TranslationWithLangProps> = ({ t, lang }) => {
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-16 relative z-10">
